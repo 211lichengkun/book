@@ -1,0 +1,73 @@
+.desktop-nav-menu {
+  width: 64px;
+  border-right: var(--border-default-size) solid var(--border-default-color);
+  background-color: #f8f8f8;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  &-top {
+    &-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      img {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+
+  &-content {
+    flex: 1;
+    &-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &-item {
+        position: relative;
+        &-content {
+          display: flex;
+          align-items: center;
+          height: 70px;
+        }
+        &-badge {
+          position: absolute;
+          right: -5px;
+          top: 15px;
+          background-color: var(--theme-badge-color);
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  &-bottom {
+    &-loading {
+      .icon {
+        background-color: transparent;
+      }
+    }
+
+    &-version {
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      cursor: pointer;
+      a {
+        text-decoration: none;
+        outline: none;
+        font-size: 12px;
+        color: var(--font-default-color);
+      }
+    }
+  }
+}

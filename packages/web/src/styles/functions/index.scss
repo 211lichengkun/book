@@ -1,0 +1,64 @@
+// 省略
+@mixin line($num) {
+  @if ($num==1) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  } @else {
+    -webkit-line-clamp: $num;
+    display: -webkit-box;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+  }
+}
+
+/**
+ * 移动端样式
+ */
+@mixin mobileStyle() {
+  @at-root {
+    .mobile {
+      @content;
+    }
+  }
+}
+
+/**
+ * PC端样式
+ */
+@mixin desktopStyle() {
+  @at-root {
+    .desktop {
+      @content;
+    }
+  }
+}
+
+// 悬浮时才显示的滚动条
+@mixin scroll-bar-hover($thumb-color: #d7dfef, $track-color: transparent) {
+  scrollbar-gutter: stable;
+  scrollbar-color: transparent $track-color;
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+
+    &-track {
+      background: $track-color;
+    }
+
+    &-thumb {
+      background-color: transparent;
+      border-radius: 2px;
+      transition: background-color 0.3s;
+    }
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+  }
+  &:hover {
+    scrollbar-color: $thumb-color $track-color;
+  }
+}

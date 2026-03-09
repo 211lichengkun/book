@@ -1,0 +1,42 @@
+@import '@/styles/functions/index.scss';
+.note-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  z-index: 0;
+  position: relative;
+
+  @include mobileStyle() {
+    .note-editor {
+      overflow: auto;
+    }
+    .editor-content {
+      overflow: hidden;
+    }
+  }
+
+  &-header {
+    // 标题下线
+    &[data-content-top='false'] {
+      border-bottom: var(--border-default-size) solid var(--border-default-color);
+    }
+  }
+
+  &-content {
+    flex: 1;
+    @include desktopStyle() {
+      .note-editor-content {
+        overflow: hidden;
+      }
+    }
+    @include mobileStyle() {
+      .note-editor-content {
+        padding-bottom: 60px;
+      }
+    }
+  }
+
+  &-footer {
+    height: max-content;
+  }
+}

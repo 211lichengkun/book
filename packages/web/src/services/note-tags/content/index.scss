@@ -1,0 +1,28 @@
+@import '@/styles/functions/tags.scss';
+.note-tags-content {
+  flex: 1;
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    &-item {
+      color: #3e3e3e;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      .icon {
+        margin-left: 6px;
+        font-weight: 300;
+        color: #d4d4d4;
+        cursor: pointer;
+        &:hover {
+          color: #a2a2a2;
+        }
+      }
+
+      @include noteTagStyle();
+    }
+  }
+}

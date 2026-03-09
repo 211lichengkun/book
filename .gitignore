@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+dist
+*.local
+dev-dist
+.eslintcache
+target
+release
+.config
+vite.build.config.ts.timestamp.*.mjs
+tsconfig.tsbuildinfo

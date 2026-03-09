@@ -1,0 +1,84 @@
+@import '@/styles/functions/index.scss';
+.desktop-task-main-task-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: move;
+  overflow: hidden;
+  &:hover {
+    background-color: var(--task-item-bg-color);
+  }
+
+  // 已完成
+  &.done {
+    opacity: 0.6;
+  }
+  &-checkbox {
+    cursor: pointer;
+    margin-right: 8px;
+    .checkbox {
+      &::before {
+        color: var(--task-item-theme-color);
+      }
+    }
+  }
+  &-content {
+    flex: 1;
+    overflow: hidden;
+    &-title {
+      font-size: 14px;
+      font-family: var(--font-family-medium);
+      color: var(--theme-default-color);
+      @include line(1);
+    }
+    &-desc {
+      font-size: 13px;
+      color: var(--theme-light-color);
+      padding-top: 2px;
+      display: inline-flex;
+      align-items: center;
+      height: 20px;
+      .icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  &-opts {
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    right: -100%;
+    gap: 15px;
+    height: 100%;
+    padding: 0px 20px;
+    top: 0;
+    align-items: center;
+    background-color: #fff;
+    transition: all 0.5s;
+    border-radius: 0px 8px 8px 0px;
+    border: 0.5px solid var(--task-item-bg-color);
+    .icon {
+      color: var(--task-item-theme-color);
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &:hover {
+    .desktop-task-main-task-item-opts {
+      right: 0px;
+    }
+  }
+  &:active {
+    .desktop-task-main-task-item-opts {
+      background-color: transparent;
+    }
+  }
+}

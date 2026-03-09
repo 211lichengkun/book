@@ -1,0 +1,26 @@
+.mobile-detail {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  // 顶部
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0px 10px;
+
+    // 分享按钮
+    .icon {
+      color: var(--mobile-icon-color);
+    }
+  }
+
+  &-content {
+    flex: 1;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,52 @@
+@import '../tiptap/index.scss';
+
+.editor {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-size: var(--font-normal-size);
+
+  * {
+    user-select: text;
+    -webkit-user-select: auto;
+  }
+
+  [contenteditable] {
+    -webkit-user-select: auto;
+    user-select: all;
+  }
+
+  // 主体
+  &-content {
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
+    border: none;
+    .tiptap {
+      padding: var(--note-item-content-padding);
+    }
+  }
+
+  &-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  div[data-tippy-root] {
+    .tippy-box {
+      background-color: transparent;
+      box-shadow: none !important;
+      color: #282828 !important;
+    }
+    .tippy-arrow {
+      display: none;
+    }
+  }
+}
+
+div[data-tippy-root] {
+  border-radius: 6px;
+}

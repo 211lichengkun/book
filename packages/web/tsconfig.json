@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "composite": true,
+    "strict": false,
+    "jsx": "preserve",
+    "moduleResolution": "bundler",
+    "noUnusedLocals": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "strictNullChecks": false,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "importHelpers": false,
+    "listEmittedFiles": true,
+    "listFiles": true,
+    "verbatimModuleSyntax": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@desktop/*": ["src/views/desktop/*"]
+
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost", "ESNext"],
+    // "customConditions": ["development"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "src/**/*.vue"],
+  "exclude": ["node_modules"],
+  "references": [
+    { "path": "./node_modules/@xynotes/components/tsconfig.json" },
+    { "path": "./node_modules/@xynotes/editor/tsconfig.json" },
+    { "path": "./node_modules/@xynotes/app-api/tsconfig.json" },
+    { "path": "./node_modules/@xynotes/store/tsconfig.json" }
+  ]
+}

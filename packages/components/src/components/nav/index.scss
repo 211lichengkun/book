@@ -1,0 +1,28 @@
+.nav {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  background-color: var(--nav-bg-color);
+
+  & > span {
+    display: inline-flex;
+    align-items: center;
+    flex: 33.33% 1 1;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  &-back {
+    color: var(--mobile-icon-color);
+    padding: 0px 14px;
+    line-height: 20px;
+    flex-shrink: 1;
+    cursor: pointer;
+    font-size: var(--font-normal-size);
+  }
+
+  &-title {
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+}

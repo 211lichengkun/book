@@ -1,0 +1,33 @@
+.bubble-menu-heading {
+  background-color: #ffffff;
+  border: 1px solid #fdfdfd;
+  border-radius: 6px;
+  box-shadow: 0px 1px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 4px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  > span {
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.3s;
+    border-radius: 4px;
+    height: 22px;
+    line-height: 22px;
+
+    &.heading {
+      font-weight: 500;
+      font-size: 14px;
+    }
+    &:hover {
+      color: #f3bb41;
+    }
+
+    &.active {
+      color: #f3bb41;
+    }
+  }
+}

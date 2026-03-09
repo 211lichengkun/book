@@ -1,0 +1,27 @@
+.mobile-detail-title {
+  position: relative;
+  padding: var(--note-item-title-padding);
+  flex: 1;
+  overflow: hidden;
+  .inputAutoSize {
+    position: relative;
+    &-content {
+      &-inner {
+        font-size: 1.2em;
+        font-weight: 600;
+        padding-right: 1em;
+        caret-color: #f3bb41;
+        height: 24px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        &:focus {
+          height: max-content;
+          overflow: auto;
+          white-space: normal;
+        }
+      }
+    }
+  }
+}

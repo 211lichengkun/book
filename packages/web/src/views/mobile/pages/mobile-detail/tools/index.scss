@@ -1,0 +1,28 @@
+.mobile-detail-tools {
+  position: fixed;
+  bottom: env(SAFE-AREA-INSET-BOTTOM, 20px);
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 1px 0px 8px rgba(0, 0, 0, 0.1);
+  height: 42px;
+  width: max-content;
+  min-width: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 20px;
+  margin: 0px auto;
+  gap: 20px;
+  transition: all 0.3s ease-in-out;
+
+  &-item {
+    color: var(--mobile-icon-color);
+    display: inline-flex;
+    align-items: center;
+  }
+}

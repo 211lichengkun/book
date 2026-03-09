@@ -1,0 +1,8 @@
+.mobile {
+  font-size: 14px;
+  height: 100%;
+  // 禁止放大
+  touch-action: none;
+  user-select: none;
+  overflow: hidden;
+}

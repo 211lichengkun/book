@@ -1,0 +1,58 @@
+@import '@/styles/functions/index.scss';
+.mobile-task-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 5px;
+  border-radius: 8px;
+  cursor: move;
+  overflow: hidden;
+  &:active {
+    background-color: var(--task-item-bg-color);
+  }
+
+  // 已完成
+  &.done {
+    opacity: 0.6;
+  }
+  &-checkbox {
+    cursor: pointer;
+    margin-right: 4px;
+    .checkbox {
+      &::before {
+        color: var(--task-item-theme-color);
+      }
+    }
+  }
+  &-content {
+    flex: 1;
+    overflow: hidden;
+    &-title {
+      line-height: 16px;
+      height: 16px;
+      font-size: 14px;
+      font-family: var(--font-family-medium);
+      color: var(--theme-default-color);
+      overflow: hidden;
+      @include line(1);
+    }
+    &-desc {
+      color: var(--theme-light-color);
+      height: 14px;
+      margin-top: 2px;
+      display: inline-flex;
+      align-items: center;
+      .icon {
+        margin-right: 4px;
+        font-size: 13px !important;
+      }
+      span {
+        display: inline-flex;
+        line-height: 14px;
+        height: 14px;
+        font-size: 11px;
+      }
+    }
+  }
+}

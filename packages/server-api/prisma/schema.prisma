@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../data/db/notes.db"
+}
+
+// 配置中心
+model NoteTable {
+  // 笔记id
+  nid String @id
+
+  // 笔记标题
+  title String
+
+  // 笔记类型
+  type String
+
+  // 排序
+  order Int
+
+  // 笔记内容
+  text String
+
+  // 笔记内容（富文本）
+  content String
+
+  // 简要信息
+  intro String
+
+  // 笔记状态
+  status Int
+
+  // 笔记作者
+  author String
+
+  // 笔记创建时间
+  createdAt DateTime? @default(now())
+
+  // 更新时间
+  updatedAt DateTime? @default(now()) @updatedAt
+
+  // 标签
+  tags String @default("[]")
+
+  @@index([author])
+  @@index([nid])
+  @@map("note_list")
+}
+
+// 四象限任务清单
+model TaskQuadrant {
+  // id
+  id Int @id @default(autoincrement())
+
+  // 任务ID
+  taskId String @unique
+
+  // 任务标题
+  title String
+
+  // 所属象限 (A-重要且紧急, B-重要不紧急, C-不重要但紧急, D-不重要不紧急)
+  quadrant String
+
+  // 任务状态 (0-未完成, 1-已完成)
+  status Int @default(0)
+
+  // 任务优先级 (数字越大优先级越高)
+  priority Int @default(0)
+
+  // 任务截止日期
+  deadline DateTime?
+
+  // 任务创建时间
+  createdAt DateTime @default(now())
+
+  // 任务更新时间
+  updatedAt DateTime @default(now()) @updatedAt
+
+  // 任务完成时间
+  completedAt DateTime?
+
+  // 任务所属用户
+  author String
+
+  @@index([author])
+  @@index([quadrant])
+  @@index([status])
+}

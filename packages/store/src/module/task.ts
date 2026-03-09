@@ -1,0 +1,143 @@
+import ApiEvent from '@store/api';
+import { ITaskItem, TaskQuadrant } from '@xynotes/typings';
+import { debounce } from '@xynotes/utils';
+import { reactive } from 'vue';
+
+/**
+ * 任务状态
+ */
+const state = reactive({
+  // 任务列表
+  taskList: {
+    A: new Array<ITaskItem>(),
+    B: new Array<ITaskItem>(),
+    C: new Array<ITaskItem>(),
+    D: new Array<ITaskItem>()
+  },
+  // 任务状态
+  taskStatus: {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0
+  } as Record<TaskQuadrant, number>
+});
+
+/**
+ * 获取任务列表数据并更新到状态管理中
+ * 该函数从API获取所有任务项，并根据任务所属象限将它们分别存储到对应的状态列表中
+ */
+const fetchTaskList = async () => {
+  state.taskList = {
+    A: new Array<ITaskItem>(),
+    B: new Array<ITaskItem>(),
+    C: new Array<ITaskItem>(),
+    D: new Array<ITaskItem>()
+  };
+  const taskList = (await ApiEvent.api.apiFetchTaskListData()) || [];
+  taskList.forEach((task) => {
+    state.taskList[task.quadrant].push(task);
+  });
+};
+
+/**
+ * 保存或更新任务项
+ * @param task 任务项
+ */
+const saveTask = async (task: ITaskItem) => {
+  // 调用API保存或更新任务
+  const result = await ApiEvent.api.apiSaveOrUpdateTask(task);
+  // 获取任务所属象限的映射表
+  const quadrant = state.taskList[result.quadrant];
+  // 将任务保存到对应的象限映射表中
+  const local = quadrant.find((t) => t.taskId === task.taskId);
+  if (local) {
+    Object.assign(local, result);
+  } else {
+    quadrant.push(result);
+  }
+  Object.entries(state.taskList).forEach(([key, value]) => {
+    state.taskStatus[key] = value.reduce((acc, cur) => {
+      if (cur.status === 0) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+  });
+};
+
+// 删除任务项
+const deleteTask = async (task: ITaskItem) => {
+  // 调用API删除任务
+  await ApiEvent.api.apiDeleteTask(task);
+  // 获取任务所属象限的映射表
+  const quadrant = state.taskList[task.quadrant];
+  // 将任务从对应的象限映射表中删除
+  const index = quadrant.findIndex((t) => t.taskId === task.taskId);
+  quadrant.splice(index, 1);
+};
+
+// 更新排序
+const orderTask = debounce(async () => {
+  // 调用API更新任务顺序
+  const taskListA = state.taskList.A.map((task, index) => ({
+    ...task,
+    priority: state.taskList.A.length - index
+  }));
+  const taskListB = state.taskList.B.map((task, index) => ({
+    ...task,
+    priority: state.taskList.B.length - index
+  }));
+  const taskListC = state.taskList.C.map((task, index) => ({
+    ...task,
+    priority: state.taskList.C.length - index
+  }));
+  const taskListD = state.taskList.D.map((task, index) => ({
+    ...task,
+    priority: state.taskList.D.length - index
+  }));
+  const taskList = [].concat(taskListA, taskListB, taskListC, taskListD).map((task) => ({
+    taskId: task.taskId,
+    quadrant: task.quadrant,
+    priority: task.priority
+  }));
+  await ApiEvent.api.apiSaveOrUpdateTaskSort(taskList);
+}, 500);
+
+// 获取任务状态
+const status = async () => {
+  const result = (await ApiEvent.api.apiFetchTaskStatus()) || [
+    {
+      quadrant: 'A',
+      _count: 0
+    },
+    {
+      quadrant: 'B',
+      _count: 0
+    },
+    {
+      quadrant: 'C',
+      _count: 0
+    },
+    {
+      quadrant: 'D',
+      _count: 0
+    }
+  ];
+  result.forEach((i) => {
+    taskStoreState.taskStatus[i.quadrant] = i._count;
+  });
+};
+
+// actions
+export const taskStoreAction = { fetchTaskList, saveTask, deleteTask, orderTask, status };
+
+// state
+export const taskStoreState = state;
+
+// 监听页面激活
+window.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    taskStoreAction.status();
+  }
+});
